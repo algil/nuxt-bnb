@@ -18,5 +18,18 @@ export default {
       homes: homes.slice(0, 3),
     }
   },
+
+  head() {
+    return {
+      title: 'Homepage',
+      meta: [
+        {
+          hid: 'description', // Unique id to overwrite global settins
+          name: 'description',
+          content: 'The Homepage',
+        },
+      ],
+    }
+  },
 }
 </script>
