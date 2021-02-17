@@ -1,7 +1,31 @@
 <template>
   <div>
     <template v-if="home">
+      <div style="display: flex">
+        <img
+          v-for="image in home.images"
+          :key="image"
+          :src="image"
+          width="200"
+          height="200"
+        />
+      </div>
       <h1>{{ home.title }}</h1>
+      <p>${{ home.pricePerNight }} / night</p>
+      <p>
+        <img src="/icons/marker.svg" width="20" height="20" />
+        {{ home.location.address }} {{ home.location.city }}
+        {{ home.location.state }} {{ home.location.country }}
+      </p>
+
+      <p>
+        <img src="/icons/star.svg" width="20" height="20" />
+        {{ home.reviewValue }}
+      </p>
+      <p>
+        {{ home.guests }} guests, {{ home.bedrooms }} rooms,
+        {{ home.beds }} beds, {{ home.bathrooms }} bath
+      </p>
     </template>
     <p v-else>No home found</p>
   </div>
