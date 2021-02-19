@@ -26,13 +26,14 @@
         {{ home.guests }} guests, {{ home.bedrooms }} rooms,
         {{ home.beds }} beds, {{ home.bathrooms }} bath
       </p>
+      <div ref="map" class="home__map"></div>
     </template>
     <p v-else>No home found</p>
   </div>
 </template>
 
 <script>
-import homes from '@/data/homes'
+import homes from '~/data/homes'
 
 export default {
   data() {
@@ -41,8 +42,29 @@ export default {
     }
   },
 
+  head() {
+    return {
+      title: this.home.title,
+    }
+  },
+
   created() {
     this.home = homes.find((home) => home.objectID === this.$route.params.id)
   },
+
+  mounted() {
+    this.$maps.showMap(
+      this.$refs.map,
+      this.home._geoloc.lat,
+      this.home._geoloc.lng
+    )
+  },
 }
 </script>
+
+<style scoped>
+.home__map {
+  width: 800px;
+  height: 800px;
+}
+</style>
