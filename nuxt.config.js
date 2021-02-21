@@ -6,6 +6,14 @@ export default {
     googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY,
   },
 
+  http: {
+    baseURL: process.env.BASE_URL,
+    headers: {
+      'X-Algolia-Application-Id': process.env.ALGOLIA_APP_ID,
+      'X-Algolia-API-Key': process.env.ALGOLIA_API_KEY,
+    },
+  },
+
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     titleTemplate: '%s | NuxtBnB',
@@ -46,7 +54,7 @@ export default {
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [],
+  modules: ['@nuxt/http'],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},

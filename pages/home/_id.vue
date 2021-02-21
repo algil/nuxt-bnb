@@ -33,23 +33,16 @@
 </template>
 
 <script>
-import homes from '~/data/homes'
-
 export default {
-  data() {
-    return {
-      home: {},
-    }
+  async asyncData({ params, $http }) {
+    const home = await $http.$get(`homes/${params.id}`)
+    return { home }
   },
 
   head() {
     return {
       title: this.home.title,
     }
-  },
-
-  created() {
-    this.home = homes.find((home) => home.objectID === this.$route.params.id)
   },
 
   mounted() {

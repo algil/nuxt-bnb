@@ -9,13 +9,10 @@
 </template>
 
 <script>
-import homes from '~/data/homes'
-
 export default {
-  data() {
-    return {
-      homes: homes.slice(0, 3),
-    }
+  async asyncData({ $http }) {
+    const result = await $http.$get('homes')
+    return { homes: result.hits }
   },
 
   head() {
