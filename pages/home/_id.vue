@@ -34,9 +34,9 @@
 
 <script>
 export default {
-  async asyncData({ params, $http }) {
-    const home = await $http.$get(`homes/${params.id}`)
-    return { home }
+  async asyncData({ params, $api, error }) {
+    const { data } = await $api.getHomeById(params.id)
+    return { home: data }
   },
 
   head() {
