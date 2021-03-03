@@ -34,7 +34,7 @@
 
 <script>
 export default {
-  async asyncData({ params, $api, error }) {
+  async asyncData({ params, $api }) {
     const { data } = await $api.getHomeById(params.id)
     return { home: data }
   },
