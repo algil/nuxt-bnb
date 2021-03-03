@@ -33,7 +33,7 @@
           <img :src="review.reviewer.image" />
           <h3>{{ review.reviewer.name }}</h3>
           <p>{{ formatDate(review.date) }}</p>
-          <p>{{ review.comment }}</p>
+          <p><ShortText :text="review.comment" /></p>
         </div>
       </template>
     </template>
