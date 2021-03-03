@@ -32,7 +32,7 @@
         <div v-for="review in reviews" :key="review.objectID">
           <img :src="review.reviewer.image" />
           <h3>{{ review.reviewer.name }}</h3>
-          <p>{{ review.date }}</p>
+          <p>{{ formatDate(review.date) }}</p>
           <p>{{ review.comment }}</p>
         </div>
       </template>
@@ -65,6 +65,17 @@ export default {
       this.home._geoloc.lat,
       this.home._geoloc.lng
     )
+  },
+
+  methods: {
+    formatDate(dateString) {
+      // TODO: Extract to a common file
+      const date = new Date(dateString)
+      return date.toLocaleString(undefined, {
+        month: 'long',
+        year: 'numeric',
+      })
+    },
   },
 }
 </script>
