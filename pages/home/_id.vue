@@ -27,6 +27,15 @@
         {{ home.beds }} beds, {{ home.bathrooms }} bath
       </p>
       <div ref="map" class="home__map"></div>
+
+      <template v-if="reviews">
+        <div v-for="review in reviews" :key="review.objectID">
+          <img :src="review.reviewer.image" />
+          <h3>{{ review.reviewer.name }}</h3>
+          <p>{{ review.date }}</p>
+          <p>{{ review.comment }}</p>
+        </div>
+      </template>
     </template>
     <p v-else>No home found</p>
   </div>
@@ -35,8 +44,13 @@
 <script>
 export default {
   async asyncData({ params, $api }) {
-    const { data } = await $api.getHomeById(params.id)
-    return { home: data }
+    const responseHome = await $api.getHomeById(params.id)
+    const responseReviews = await $api.getReviewsByHomeId(params.id)
+
+    return {
+      home: responseHome.data,
+      reviews: responseReviews.data.hits,
+    }
   },
 
   head() {
