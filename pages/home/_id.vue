@@ -44,12 +44,12 @@
 <script>
 export default {
   async asyncData({ params, $api }) {
-    const responseHome = await $api.getHomeById(params.id)
-    const responseReviews = await $api.getReviewsByHomeId(params.id)
+    const { data: home } = await $api.getHomeById(params.id)
+    const { data: reviews } = await $api.getReviewsByHomeId(params.id)
 
     return {
-      home: responseHome.data,
-      reviews: responseReviews.data.hits,
+      home,
+      reviews,
     }
   },
 

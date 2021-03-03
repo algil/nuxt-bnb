@@ -14,9 +14,16 @@ export default function ({ $http, error }, inject) {
   }
 
   async function getReviewsByHomeId(homeId) {
-    return await post('reviews/query', {
+    const result = await post('reviews/query', {
       filters: `homeId:${homeId}`,
+      hitsPerPage: 6,
+      attributesToHighlight: [],
     })
+
+    return {
+      ...result,
+      data: result.data.hits ?? {},
+    }
   }
 
   function get(url) {
