@@ -3,6 +3,7 @@ export default function ({ $http, error }, inject) {
     getHomes,
     getHomeById,
     getReviewsByHomeId,
+    getUsersByHomeId,
   })
 
   function getHomes() {
@@ -17,6 +18,18 @@ export default function ({ $http, error }, inject) {
     const result = await post('reviews/query', {
       filters: `homeId:${homeId}`,
       hitsPerPage: 6,
+      attributesToHighlight: [],
+    })
+
+    return {
+      ...result,
+      data: result.data.hits ?? {},
+    }
+  }
+
+  async function getUsersByHomeId(homeId) {
+    const result = await post('users/query', {
+      filters: `homeId:${homeId}`,
       attributesToHighlight: [],
     })
 

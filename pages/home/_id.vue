@@ -36,6 +36,14 @@
           <p><ShortText :text="review.comment" /></p>
         </div>
       </template>
+
+      <template v-if="user">
+        <img :src="user.image" />
+        <h3>{{ user.name }}</h3>
+        <p>{{ formatDate(user.joined) }}</p>
+        <p>{{ user.reviewCount }}</p>
+        <p>{{ user.description }}</p>
+      </template>
     </template>
     <p v-else>No home found</p>
   </div>
@@ -46,10 +54,12 @@ export default {
   async asyncData({ params, $api }) {
     const { data: home } = await $api.getHomeById(params.id)
     const { data: reviews } = await $api.getReviewsByHomeId(params.id)
+    const { data: users } = await $api.getUsersByHomeId(params.id)
 
     return {
       home,
       reviews,
+      user: users[0],
     }
   },
 
